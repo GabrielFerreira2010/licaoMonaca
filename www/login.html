@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="www/style.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <a href="index.html" class="logo">wellington gordo<span>.</span></a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="login.html" class="active">Login</a>
+            <a href="cadastro.html" class="btn-nav">Cadastrar</a>
+        </nav>
+    </header>
+
+    <main class="auth-container">
+        <section class="auth-card">
+            <div class="auth-icon">✦</div>
+            <h1>Bem-vindo de volta!</h1>
+            <p class="subtitle">Entre na sua conta para continuar.</p>
+
+            <form id="loginForm">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="seu@email.com" required>
+
+                <label for="senha">Senha</label>
+                <input type="password" id="senha" placeholder="Digite sua senha" required>
+
+                <button type="submit" class="btn-primary full">
+                    Entrar na conta
+                </button>
+
+                <p id="mensagem" class="mensagem"></p>
+            </form>
+
+            <p class="switch-page">
+                Ainda não tem uma conta?
+                <a href="cadastro.html">Cadastre-se</a>
+            </p>
+            <a href="index.html" class="back-link">← Voltar para Home</a>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const senha = document.getElementById("senha").value;
+            const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+            if (usuario && usuario.email === email && usuario.senha === senha) {
+                localStorage.setItem("logado", "true");
+                window.location.href = "index.html";
+            } else {
+                document.getElementById("mensagem").textContent =
+                    "E-mail ou senha incorretos. Verifique seus dados.";
+            }
+        });
+    </script>
+
+</body>
+</html>
